@@ -73,7 +73,7 @@ export const useFinancialRecords = () => {
 
   if (!context) {
     throw new Error(
-      "useFinancialRecords must be used within a FinancialRecordsPRovider."
+      "useFinancialRecords must be used within a FinancialRecordsProvider."
     );
   }
 

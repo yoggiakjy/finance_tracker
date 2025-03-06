@@ -42,7 +42,7 @@ export const NavigationItems: NavigationItemType[] = [
   },
   {
     title: "Transaction History",
-    link: "/",
+    link: "/transactions",
   },
   {
     title: "Assets",

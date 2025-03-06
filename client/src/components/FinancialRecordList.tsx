@@ -1,10 +1,15 @@
 import { useFinancialRecords } from "../contexts/FinancialRecordContext";
 
-const FinancialRecordList = () => {
+const FinancialRecordList = ({
+  year,
+} : {
+  year?: string;
+}) => {
   const { records } = useFinancialRecords();
-
+  console.log(records[0])
   return (
     <div>
+      {year && <div>{year}</div>}
       {records.map((record) => (
         <div key={record.id} className="flex gap-4">
           <p>{record.date}</p>
