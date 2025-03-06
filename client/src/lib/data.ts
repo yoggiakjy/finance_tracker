@@ -1,4 +1,6 @@
-export const TransactionCategories = [
+import { CategoryType, NavigationItemType } from "./globalTypes";
+
+export const TransactionCategories: CategoryType[] = [
   {
     categoryGroup: "---",
     categories: ["Choose a Category"],
@@ -32,3 +34,18 @@ export const TransactionCategories = [
     categories: ["Wages", "Other Income"],
   },
 ];
+
+export const NavigationItems: NavigationItemType[] = [
+  {
+    title: "Base",
+    link:"/",
+  },
+  {
+    title: "Transaction History",
+    link: "/",
+  },
+  {
+    title: "Assets",
+    link: "/",
+  }
+]

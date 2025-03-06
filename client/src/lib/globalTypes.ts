@@ -1,7 +1,7 @@
 export type CategoryType = {
     categoryGroup: string;
     categories: string[];
-}
+};
 export interface FinancialRecord {
     id?: string;
     userId: string;
@@ -9,4 +9,9 @@ export interface FinancialRecord {
     category: string;
     description: string;
     amount: number;
-}
+};
+
+export type NavigationItemType = {
+    title: string;
+    link: string;
+};
