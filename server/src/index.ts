@@ -1,6 +1,7 @@
 import express, { Express } from "express";
 import mongoose from "mongoose";
 import financialRecordRouter from './routes/financial-records';
+import financialBalanceRouter from './routes/financial-balance';
 import cors from "cors";
 
 const app: Express = express();
@@ -17,6 +18,7 @@ mongoose
   .catch((err) => console.error("FAILED TO CONNECT TO MONGODB: ", err));
 
 app.use("/financial-records", financialRecordRouter);
+app.use("/financial-balance", financialBalanceRouter);
 
 app.listen(port, () => {
     console.log(`Server Running on Port ${port}`);

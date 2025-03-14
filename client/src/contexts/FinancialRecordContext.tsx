@@ -20,8 +20,8 @@ export const FinancialRecordsProvider = ({
 }) => {
   const [records, setRecords] = useState<FinancialRecord[]>([]);
   const { user } = useUser();
-  
-  const fetchRecords = async() => {
+
+  const fetchRecords = async () => {
     if (!user) return;
     const response = await fetch(
       `http://localhost:3001/financial-records/getAllByUserId/${user.id}`
@@ -31,7 +31,7 @@ export const FinancialRecordsProvider = ({
       const records = await response.json();
       console.log(records);
       setRecords(records);
-    };
+    }
   };
 
   useEffect(() => {
@@ -43,8 +43,8 @@ export const FinancialRecordsProvider = ({
       method: "POST",
       body: JSON.stringify(record),
       headers: {
-        'Content-Type': "application/json",
-      }
+        "Content-Type": "application/json",
+      },
     });
 
     try {
@@ -54,13 +54,12 @@ export const FinancialRecordsProvider = ({
         setRecords((prev) => [...prev, newRecord]);
       }
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
   };
 
   return (
     <FinancialRecordsContext.Provider value={{ records, addRecord }}>
-      {" "}
       {children}
     </FinancialRecordsContext.Provider>
   );

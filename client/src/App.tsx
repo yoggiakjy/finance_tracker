@@ -4,6 +4,7 @@ import Dashboard from "./components/Dashboard";
 import { FinancialRecordsProvider } from "./contexts/FinancialRecordContext";
 import Transactions from "./pages/transactions";
 import TransactionPage from "./pages/transactions/transactionPage";
+import { FinancialBalanceProvider } from "./contexts/FinancialBalanceContext";
 function App() {
   return (
     <BrowserRouter>
@@ -12,7 +13,9 @@ function App() {
           path="/"
           element={
             <FinancialRecordsProvider>
-              <Dashboard />
+              <FinancialBalanceProvider>
+                <Dashboard />
+              </FinancialBalanceProvider>
             </FinancialRecordsProvider>
           }
         />

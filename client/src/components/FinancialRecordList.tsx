@@ -6,7 +6,7 @@ const FinancialRecordList = ({
   year?: string;
 }) => {
   const { records } = useFinancialRecords();
-  console.log(records[0])
+
   return (
     <div>
       {year && <div>{year}</div>}

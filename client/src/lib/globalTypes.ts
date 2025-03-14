@@ -11,6 +11,12 @@ export interface FinancialRecord {
     amount: number;
 };
 
+export interface FinancialBalance {
+    id?: string;
+    userId: string;
+    balance: number;
+}
+
 export type NavigationItemType = {
     title: string;
     link: string;
