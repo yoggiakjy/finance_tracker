@@ -15,7 +15,7 @@ const Modal = ({
 
   return createPortal(
     <div
-      className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center bg-gradient-to-r from-slate-950 via-slate-700 to-slate-950 rounded-lg shadow-lg text-center text-neutral-50 px-[3rem] ${className} `}
+      className={`absolute z-100 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center bg-gradient-to-r from-slate-950 via-slate-700 to-slate-950 rounded-lg shadow-lg text-center text-neutral-50 px-[3rem] ${className} `}
     >
       {children}
       <button onClick={onClose}>Close</button>

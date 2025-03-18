@@ -4,9 +4,11 @@ import { FinancialRecord } from "../lib/globalTypes";
 
 interface FinancialRecordsContextType {
   records: FinancialRecord[];
+  recordsByDate: FinancialRecord[];
   addRecord: (record: FinancialRecord) => void;
   updateRecord: (id: string, newRecord: FinancialRecord) => void;
   deleteRecord: (id: string) => void;
+  fetchRecordsByDate: (month: number, year: number) => void;
 }
 
 export const FinancialRecordsContext = createContext<
@@ -19,6 +21,7 @@ export const FinancialRecordsProvider = ({
   children: React.ReactNode;
 }) => {
   const [records, setRecords] = useState<FinancialRecord[]>([]);
+  const [recordsByDate, setRecordsByDate] = useState<FinancialRecord[]>([]);
   const { user } = useUser();
 
   const fetchRecords = async () => {
@@ -36,6 +39,20 @@ export const FinancialRecordsProvider = ({
   useEffect(() => {
     fetchRecords();
   }, [user]);
+
+  const fetchRecordsByDate = async (year: number, month: number) => {
+    if (!user) return;
+    try {
+      const response = await fetch(
+        `http://localhost:3001/financial-records/getAllByUserId/${user.id}/${year}/${month}`
+      );
+
+      const recordsByDate = await response.json();
+      setRecordsByDate(recordsByDate);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const addRecord = async (record: FinancialRecord) => {
     const response = await fetch("http://localhost:3001/financial-records", {
@@ -108,7 +125,14 @@ export const FinancialRecordsProvider = ({
 
   return (
     <FinancialRecordsContext.Provider
-      value={{ records, addRecord, updateRecord, deleteRecord }}
+      value={{
+        records,
+        recordsByDate,
+        addRecord,
+        updateRecord,
+        deleteRecord,
+        fetchRecordsByDate,
+      }}
     >
       {children}
     </FinancialRecordsContext.Provider>

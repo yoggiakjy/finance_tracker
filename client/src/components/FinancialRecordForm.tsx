@@ -8,7 +8,7 @@ const FinancialRecordForm = ({
 } : {
   categoryList: CategoryType[];
 }) => {
-  const [date, setDate] = useState<string>("");
+  const [date, setDate] = useState<Date>(new Date());
   const [category, setCategory] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [amount, setAmount] = useState<string>("");
@@ -28,7 +28,7 @@ const FinancialRecordForm = ({
     }
 
     addRecord(newRecord);
-    setDate("");
+    setDate(new Date());
     setCategory("");
     setDescription("");
     setAmount("");
@@ -42,8 +42,8 @@ const FinancialRecordForm = ({
           <input
             type="date"
             name="Date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
+            value={date.toISOString().split('T')[0]}
+            onChange={(e) => setDate(new Date(e.target.value))}
             className="border rounded-sm pl-1"
           />
         </div>

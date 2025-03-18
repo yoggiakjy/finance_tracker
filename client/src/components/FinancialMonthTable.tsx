@@ -8,11 +8,12 @@ type FinancialMonthTableProps = {
 const FinancialMonthTable = ({ className }: FinancialMonthTableProps) => {
   const categories = ["Date", "Category", "Entry", "Amount", "Total", "Delete"];
   const { records, updateRecord, deleteRecord } = useFinancialRecords();
+    
   return (
     <div className={`flex justify-center items-center ${className}`}>
       <table className="text-lg font-light border rounded-sm">
         <thead>
-          <tr className="grid grid-cols-8 border-b">
+          <tr className="w-[70rem] grid grid-cols-8 border-b">
             {categories.map((category, index) => (
               <th key={index} className={`${category === "Entry" ? "col-span-3" : ""} border-r last:border-none px-[0.5rem]`}>
                 {category}
@@ -27,7 +28,7 @@ const FinancialMonthTable = ({ className }: FinancialMonthTableProps) => {
               key={index}
               className="w-[70rem] grid grid-cols-8 border-b last:border-none"
             >
-              <td className="border-r px-[0.5rem] py-[0.3rem]">{record.date}</td>
+              <td className="border-r px-[0.5rem] py-[0.3rem]">{new Date(record.date).toISOString().split('T')[0]}</td>
               <td className="border-r px-[0.5rem] py-[0.3rem]">{record.category}</td>
               <td className="border-r px-[0.5rem] py-[0.3rem] col-span-3">
                 <EditableCell

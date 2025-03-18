@@ -1,18 +1,28 @@
+import { useEffect } from "react";
 import { useFinancialRecords } from "../contexts/FinancialRecordContext";
 
 const FinancialRecordList = ({
   year,
+  month,
 } : {
-  year?: string;
+  year?: number;
+  month?: number;
 }) => {
-  const { records } = useFinancialRecords();
+  const { recordsByDate, fetchRecordsByDate } = useFinancialRecords();
+
+  useEffect(() => {
+    if (year && month) {
+      fetchRecordsByDate(year, month);
+    }
+  }, [year, month])
 
   return (
-    <div>
+    <div className="relative z-50">
       {year && <div>{year}</div>}
-      {records.map((record) => (
-        <div key={record.id} className="flex gap-4">
-          <p>{record.date}</p>
+      {month && <div>{month}</div>}
+      {recordsByDate.map((record) => (
+        <div key={record._id} className="flex gap-4">
+          <p>{new Date(record.date).toISOString().split('T')[0]}</p>
           <p>{record.category}</p>
           <p>{record.description}</p>
           <p>{record.amount}</p>

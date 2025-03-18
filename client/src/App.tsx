@@ -5,6 +5,7 @@ import { FinancialRecordsProvider } from "./contexts/FinancialRecordContext";
 import Transactions from "./pages/transactions";
 import TransactionPage from "./pages/transactions/transactionPage";
 import { FinancialBalanceProvider } from "./contexts/FinancialBalanceContext";
+import Layout from "./components/Layout";
 function App() {
   return (
     <BrowserRouter>
@@ -14,7 +15,9 @@ function App() {
           element={
             <FinancialRecordsProvider>
               <FinancialBalanceProvider>
-                <Dashboard />
+                <Layout>
+                  <Dashboard />
+                </Layout>
               </FinancialBalanceProvider>
             </FinancialRecordsProvider>
           }
@@ -22,7 +25,7 @@ function App() {
         <Route path="/auth" element={<Auth />} />
         <Route path="/transactions" element={<Transactions />} />
         <Route
-          path="/transactions/:slug"
+          path="/transactions/:year/:month"
           element={
             <FinancialRecordsProvider>
               <TransactionPage />

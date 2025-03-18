@@ -5,7 +5,7 @@ export type CategoryType = {
 export interface FinancialRecord {
     _id?: string;
     userId: string;
-    date: string;
+    date: Date;
     category: string;
     description: string;
     amount: number;
