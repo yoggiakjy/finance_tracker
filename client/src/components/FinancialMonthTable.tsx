@@ -6,13 +6,13 @@ type FinancialMonthTableProps = {
 };
 
 const FinancialMonthTable = ({ className }: FinancialMonthTableProps) => {
-  const categories = ["Date", "Category", "Entry", "Amount", "Total"];
-  const { records, updateRecord } = useFinancialRecords();
+  const categories = ["Date", "Category", "Entry", "Amount", "Total", "Delete"];
+  const { records, updateRecord, deleteRecord } = useFinancialRecords();
   return (
     <div className={`flex justify-center items-center ${className}`}>
       <table className="text-lg font-light border rounded-sm">
         <thead>
-          <tr className="grid grid-cols-7 border-b">
+          <tr className="grid grid-cols-8 border-b">
             {categories.map((category, index) => (
               <th key={index} className={`${category === "Entry" ? "col-span-3" : ""} border-r last:border-none px-[0.5rem]`}>
                 {category}
@@ -25,7 +25,7 @@ const FinancialMonthTable = ({ className }: FinancialMonthTableProps) => {
           {records.map((record, index) => (
             <tr
               key={index}
-              className="w-[60rem] grid grid-cols-7 border-b last:border-none"
+              className="w-[70rem] grid grid-cols-8 border-b last:border-none"
             >
               <td className="border-r px-[0.5rem] py-[0.3rem]">{record.date}</td>
               <td className="border-r px-[0.5rem] py-[0.3rem]">{record.category}</td>
@@ -48,7 +48,12 @@ const FinancialMonthTable = ({ className }: FinancialMonthTableProps) => {
                   } font-medium`}
                 />
               </td>
-              <td className="px-[0.5rem] py-[0.3rem]">{record.amount.toFixed(2)}</td>
+              <td className="px-[0.5rem] py-[0.3rem] border-r">{record.amount.toFixed(2)}</td>
+              <td className="px-[0.5rem] py-[0.3rem] flex justify-center items-center">
+                <button onClick={() => deleteRecord(record._id ?? "")} className="border px-4 py-1 rounded-md bg-blue-400 text-white">
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>

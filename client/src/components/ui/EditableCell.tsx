@@ -29,7 +29,7 @@ const EditableCell = ({
   };
 
   return (
-    <div onClick={() => setIsEditing(true)} className={`${className}`}>
+    <div onClick={() => setIsEditing(true)} className={className} style={{ cursor: "pointer"}}>
       {isEditing ? (
         <input
           value={value}
