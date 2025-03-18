@@ -1,50 +1,58 @@
 import { useFinancialRecords } from "../contexts/FinancialRecordContext";
+import EditableCell from "./ui/EditableCell";
 
-const FinancialMonthTable = ({ className }: { className?: string }) => {
-  const categories = [
-    "Date",
-    "Category",
-    "Entry",
-    "Expense",
-    "Income",
-    "Total",
-  ];
-  const { records } = useFinancialRecords();
+type FinancialMonthTableProps = {
+  className?: string;
+};
+
+const FinancialMonthTable = ({ className }: FinancialMonthTableProps) => {
+  const categories = ["Date", "Category", "Entry", "Amount", "Total"];
+  const { records, updateRecord } = useFinancialRecords();
   return (
-    <div
-      className={`w-full flex justify-center items-center mt-[3rem] ${className}`}
-    >
-      <div className="w-[80%] grid grid-rows-2 text-2xl font-light border">
-        <div className=" grid grid-cols-6 border-b">
-          {categories.map((category, index) => (
-            <p key={index} className="border-r last:border-none px-[0.5rem]">
-              {category}
-            </p>
-          ))}
-        </div>
+    <div className={`flex justify-center items-center ${className}`}>
+      <table className="text-lg font-light border rounded-sm">
+        <thead>
+          <tr className="grid grid-cols-7 border-b">
+            {categories.map((category, index) => (
+              <th key={index} className={`${category === "Entry" ? "col-span-3" : ""} border-r last:border-none px-[0.5rem]`}>
+                {category}
+              </th>
+            ))}
+          </tr>
+        </thead>
 
-        {records.map((record) => (
-          <div
-            key={record.id}
-            className="grid grid-cols-6 border-b last:border-none"
-          >
-            <p className="border-r px-[0.5rem]">{record.date}</p>
-            <p className="border-r px-[0.5rem]">{record.category}</p>
-            <p className="border-r px-[0.5rem]">{record.description}</p>
-            {(record.amount < 0 && (
-              <p className="border-r border-black px-[0.5rem] text-red-500 font-medium">
-                {record.amount}
-              </p>
-            )) || <p className="border-r px-[0.5rem]"></p>}
-            {(record.amount > 0 && (
-              <p className="border-r border-black px-[0.5rem] text-green-500 font-medium">
-                {record.amount}
-              </p>
-            )) || <p className="border-r px-[0.5rem]"></p>}
-            <p className="px-[0.5rem]">0</p>
-          </div>
-        ))}
-      </div>
+        <tbody>
+          {records.map((record, index) => (
+            <tr
+              key={index}
+              className="w-[60rem] grid grid-cols-7 border-b last:border-none"
+            >
+              <td className="border-r px-[0.5rem] py-[0.3rem]">{record.date}</td>
+              <td className="border-r px-[0.5rem] py-[0.3rem]">{record.category}</td>
+              <td className="border-r px-[0.5rem] py-[0.3rem] col-span-3">
+                <EditableCell
+                  initialValue={record.description}
+                  initialRecord={record}
+                  field="description"
+                  updateRecord={updateRecord}
+                />
+              </td>
+              <td className="border-r px-[0.5rem] py-[0.3rem]">
+                <EditableCell
+                  initialValue={record.amount.toFixed(2)}
+                  initialRecord={record}
+                  field="amount"
+                  updateRecord={updateRecord}
+                  className={`${
+                    record.amount < 0 ? "text-red-500" : "text-green-500"
+                  } font-medium`}
+                />
+              </td>
+              <td className="px-[0.5rem] py-[0.3rem]">{record.amount.toFixed(2)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

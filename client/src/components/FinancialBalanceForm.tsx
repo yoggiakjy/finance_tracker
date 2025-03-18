@@ -10,9 +10,10 @@ const FinancialBalanceForm = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+    
     const newBalanceRecord = {
       userId: user?.id ?? "",
+      date: Date.now(),
       balance: parseFloat(newBalance),
     };
 

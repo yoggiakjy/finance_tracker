@@ -6,13 +6,13 @@ import Modal from "./ui/Modal";
 import { useState } from "react";
 import FinancialMonthTable from "./FinancialMonthTable";
 import FinancialBalanceForm from "./FinancialBalanceForm";
-import { useFinancialBalance } from "../contexts/FinancialBalanceContext";
+import CategoryDisplay from "./CategoryDisplay";
+import BalanceView from "./BalanceView";
 
 const Dashboard = () => {
   const { isSignedIn, user, isLoaded } = useUser();
   const [ isTransactionModalOpen, setIsTransactionModalOpen] = useState(false);
   const [ isBalanceModalOpen, setIsBalanceModalOpen ] = useState(false);
-  const { balance } = useFinancialBalance();
 
   if (!isLoaded) {
     return <div>Loading...</div>;
@@ -22,10 +22,9 @@ const Dashboard = () => {
     return <div>Sign in to view this page.</div>;
   }
 
-  console.log("balkance:", balance);
   return (
     <Layout>
-      <div className="relative w-full flex flex-col justify-center items-center text-center ">
+      <div className="relative w-full flex flex-col justify-center items-center text-center mt-[4rem]">
         <h1 className="font-light text-5xl ">
           Hello {user.firstName}!
           <br />
@@ -51,7 +50,12 @@ const Dashboard = () => {
           <FinancialBalanceForm />
         </Modal>
       </div>
-      <FinancialMonthTable />
+
+      <BalanceView />
+      <div className="w-full flex justify-center items-start gap-[5rem] mt-[3rem]">
+        <FinancialMonthTable />
+        <CategoryDisplay />
+      </div>
     </Layout>
   );
 };

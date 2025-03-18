@@ -3,7 +3,7 @@ export type CategoryType = {
     categories: string[];
 };
 export interface FinancialRecord {
-    id?: string;
+    _id?: string;
     userId: string;
     date: string;
     category: string;
@@ -12,7 +12,7 @@ export interface FinancialRecord {
 };
 
 export interface FinancialBalance {
-    id?: string;
+    _id?: string;
     userId: string;
     balance: number;
 }

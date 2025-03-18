@@ -29,7 +29,6 @@ export const FinancialBalanceProvider = ({
 
     if (response.ok) {
       const balance = await response.json();
-      console.log("Balance:", balance);
       setBalance(balance);
     }
   };
@@ -50,7 +49,6 @@ export const FinancialBalanceProvider = ({
     try {
       if (response.ok) {
         const newBalance = await response.json();
-        console.log(balance);
         setBalance(newBalance);
       }
     } catch (err) {

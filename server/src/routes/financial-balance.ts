@@ -10,8 +10,8 @@ router.get("/getBalanceByUserId/:userId", async (req: Request, res: Response): P
             return res.status(404).send("User ID is required!");
         }
 
-        const financialBalance = await FinancialBalanceModel.find({userId: userId});
-        if (!financialBalance || financialBalance.length === 0) {
+        const financialBalance = await FinancialBalanceModel.findOne({userId: userId});
+        if (!financialBalance) {
             return res.status(404).send("No records found for the user!");
         }
 
