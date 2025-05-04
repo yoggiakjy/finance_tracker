@@ -1,7 +1,8 @@
 import express, { Express } from "express";
 import mongoose from "mongoose";
-import financialRecordRouter from './routes/financial-records';
-import financialBalanceRouter from './routes/financial-balance';
+import financialRecordRouter from "./routes/financial-records";
+import financialBalanceRouter from "./routes/financial-balance";
+import investmentRecordRouter from "./routes/investment-records";
 import cors from "cors";
 import dotenv from "dotenv";
 
@@ -26,7 +27,8 @@ mongoose
 
 app.use("/financial-records", financialRecordRouter);
 app.use("/financial-balance", financialBalanceRouter);
+app.use("/investment-records", investmentRecordRouter);
 
 app.listen(port, () => {
-    console.log(`Server Running on Port ${port}`);
+  console.log(`Server Running on Port ${port}`);
 });

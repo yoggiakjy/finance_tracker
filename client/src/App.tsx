@@ -7,6 +7,7 @@ import TransactionPage from "./pages/transactions/transactionPage";
 import { FinancialBalanceProvider } from "./contexts/FinancialBalanceContext";
 import Layout from "./components/Layout";
 import Assets from "./pages/assets";
+import { InvestmentRecordsProvider } from "./contexts/InvestmentRecordContext";
 function App() {
   return (
     <BrowserRouter>
@@ -38,9 +39,11 @@ function App() {
           element={
             <FinancialRecordsProvider>
               <FinancialBalanceProvider>
-                <Layout>
-                  <Assets />
-                </Layout>
+                <InvestmentRecordsProvider>
+                  <Layout>
+                    <Assets />
+                  </Layout>
+                </InvestmentRecordsProvider>
               </FinancialBalanceProvider>
             </FinancialRecordsProvider>
           }

@@ -1,5 +1,9 @@
 import { useUser } from "@clerk/clerk-react";
-import BalanceView from "../../components/BalanceView";
+import AssetTracker from "../../components/ui/assets/AssetTracker";
+import AssetBreakdown from "../../components/ui/assets/AssetBreakdown";
+import MilestoneCell from "../../components/ui/assets/MilestoneCell";
+import SummaryCell from "../../components/ui/assets/SummaryCell";
+import AssetsView from "../../components/AssetsView";
 const Asset = () => {
   const { isSignedIn, user, isLoaded } = useUser();
 
@@ -18,10 +22,17 @@ const Asset = () => {
           <p className="text-2xl font-semibold text-neutral-200">
             {`${user.firstName}'s Assets`}
           </p>
+          <div className="grid grid-cols-2 w-full justify-center items-center gap-10">
+            <MilestoneCell />
+            <MilestoneCell />
+          </div>
+
+          <AssetBreakdown />
+          <AssetTracker />
         </div>
 
         {/* Main Balance and Transactions */}
-        <BalanceView className="col-span-1 " />
+        <AssetsView className="col-span-1 " />
       </div>
     </div>
   );
