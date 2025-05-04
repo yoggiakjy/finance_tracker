@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { FinancialBalance } from "../lib/globalTypes";
 import { useUser } from "@clerk/clerk-react";
 
-interface FinancialBalanceContextType {
+export interface FinancialBalanceContextType {
   balance: FinancialBalance | null;
   addBalance: (balance: FinancialBalance) => void;
   // updateBalance: (id: string, newBalance: FinancialBalance) => void;

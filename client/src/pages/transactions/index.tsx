@@ -20,10 +20,6 @@ const Transactions = () => {
   return (
     <Layout>
       <div className="w-full h-full flex flex-col justify-center items-center">
-        <img
-          src="/public/1114362.png"
-          className="absolute inset-0 z-10 h-screen w-full object-cover"
-        />
         <div className="relative z-50 w-full flex flex-col justify-center items-center text-center mt-[8rem]">
           <p className="text-3xl font-light">View your transaction history.</p>
 

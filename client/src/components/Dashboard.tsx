@@ -7,12 +7,16 @@ import FinancialMonthTable from "./FinancialMonthTable";
 import FinancialBalanceForm from "./FinancialBalanceForm";
 import CategoryDisplay from "./CategoryDisplay";
 import BalanceView from "./BalanceView";
+import FinanceCell from "./ui/dashboard/FinanceCell";
+import { useFinancialBalance } from "../contexts/FinancialBalanceContext";
+import GoalCell from "./ui/dashboard/GoalCell";
+import AnalysisCell from "./ui/dashboard/AnalysisCell";
 
 const Dashboard = () => {
   const { isSignedIn, user, isLoaded } = useUser();
   const [isTransactionModalOpen, setIsTransactionModalOpen] = useState(false);
   const [isBalanceModalOpen, setIsBalanceModalOpen] = useState(false);
-
+  const { balance } = useFinancialBalance();
   if (!isLoaded) {
     return <div>Loading...</div>;
   }
@@ -23,18 +27,31 @@ const Dashboard = () => {
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center">
-      <img
-        src="/public/1114362.png"
-        className="absolute inset-0 z-10 h-screen w-full object-cover"
-      />
-      <div className="relative z-50 border border-white rounded-xl w-[90%] h-[55rem] flex flex-col justify-center items-center backdrop-blur-[35px] pt-[3rem] pb-[5rem] mt-[3rem]">
-        <div className="relative z-50 w-full h-full flex flex-col justify-center items-center text-center">
-          <h1 className="font-light text-5xl ">
-            Hello {user.firstName}!
-            <br />
-            Here are your finances.
-          </h1>
+      <div className="w-full grid grid-cols-4 flex-col justify-center items-center py-6 px-12">
+        {/* General User Statistics */}
+        <div className="col-span-3 flex flex-col justify-start items-start h-full  gap-10 mr-10">
+          <p className="text-2xl font-semibold text-neutral-200">
+            {`${user.firstName}'s Stats`}
+          </p>
 
+          <div className="w-full flex justify-evenly items-center gap-10">
+            <FinanceCell heading={"Monthly Income"} stat={balance} />
+            <FinanceCell heading={"Monthly Spending"} stat={balance} />
+            <FinanceCell heading={"Monthly Savings"} stat={balance} />
+          </div>
+
+          <div className="w-full flex justify-between items-center gap-10">
+            <GoalCell />
+            <GoalCell />
+          </div>
+
+          <AnalysisCell />
+        </div>
+
+        {/* Main Balance and Transactions */}
+        <BalanceView className="col-span-1 " />
+
+        {/* <div className="relative z-50 w-full h-full flex flex-col justify-center items-center text-center border border-red-500">
           <div className="relative z-50 flex justify-between items-center space-x-[2rem] mt-[3rem]">
             <button
               className="border px-4 rounded-md"
@@ -68,7 +85,7 @@ const Dashboard = () => {
         <div className="w-full h-full flex justify-center items-start gap-[5rem] mt-[3rem]">
           <FinancialMonthTable />
           <CategoryDisplay />
-        </div>
+        </div> */}
       </div>
     </div>
   );

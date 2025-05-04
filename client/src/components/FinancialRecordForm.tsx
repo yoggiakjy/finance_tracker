@@ -5,7 +5,7 @@ import { useFinancialRecords } from "../contexts/FinancialRecordContext";
 
 const FinancialRecordForm = ({
   categoryList,
-} : {
+}: {
   categoryList: CategoryType[];
 }) => {
   const [date, setDate] = useState<Date>(new Date());
@@ -25,29 +25,32 @@ const FinancialRecordForm = ({
       category: category,
       description: description,
       amount: parseFloat(amount),
-    }
+    };
 
     addRecord(newRecord);
     setDate(new Date());
     setCategory("");
     setDescription("");
     setAmount("");
-  }
+  };
 
   return (
     <div className="flex justify-center">
-      <form className="flex flex-col items-start space-y-4 mt-8" onSubmit={handleSubmit}>
+      <form
+        className="flex flex-col items-start space-y-4 mt-8"
+        onSubmit={handleSubmit}
+      >
         <div className="flex space-x-3">
           <label className="w-[6rem] text-start">Date:</label>
           <input
             type="date"
             name="Date"
-            value={date.toISOString().split('T')[0]}
+            value={date.toISOString().split("T")[0]}
             onChange={(e) => setDate(new Date(e.target.value))}
             className="border rounded-sm pl-1"
           />
         </div>
-        
+
         <div className="flex space-x-3">
           <label className="w-[6rem] text-start">Category:</label>
           <select
@@ -58,26 +61,26 @@ const FinancialRecordForm = ({
             className="border rounded-sm"
           >
             {categoryList.map((group) => (
-                <optgroup label={group.categoryGroup}>
-                  {group.categories.map((category) => (
-                    <option value={category}>{category}</option>
-                  ))}
-                </optgroup>
+              <optgroup label={group.categoryGroup}>
+                {group.categories.map((category) => (
+                  <option value={category}>{category}</option>
+                ))}
+              </optgroup>
             ))}
           </select>
         </div>
-        
+
         <div className="flex justify-start space-x-3">
-            <label className="w-[6rem] text-start">Description:</label>
-            <textarea
-              name="Description"
-              value={description}
-              placeholder="Enter a description..."
-              rows={3}
-              cols={30}
-              onChange={(e) => setDescription(e.target.value)}
-              className="border rounded-sm p-1"
-            />
+          <label className="w-[6rem] text-start">Description:</label>
+          <textarea
+            name="Description"
+            value={description}
+            placeholder="Enter a description..."
+            rows={3}
+            cols={30}
+            onChange={(e) => setDescription(e.target.value)}
+            className="border rounded-sm p-1"
+          />
         </div>
 
         <div className="flex space-x-3">
@@ -91,7 +94,13 @@ const FinancialRecordForm = ({
           />
         </div>
         <div className="w-full mt-[2rem]">
-          <button type="submit" className="border-2 border-transparent hover:border-cyan-500 transition-colors duration-200 rounded-lg bg-gray-200 px-6 py-2 "> Add Record</button>
+          <button
+            type="submit"
+            className="border-2 border-transparent hover:border-cyan-500 transition-colors duration-200 rounded-lg bg-gray-200 px-6 py-2 "
+          >
+            {" "}
+            Add Record
+          </button>
         </div>
       </form>
     </div>

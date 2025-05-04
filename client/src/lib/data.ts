@@ -37,15 +37,15 @@ export const TransactionCategories: CategoryType[] = [
 
 export const NavigationItems: NavigationItemType[] = [
   {
-    title: "Base",
-    link:"/",
+    title: "Dashboard",
+    link: "/",
   },
   {
-    title: "Transaction History",
+    title: "Transactions",
     link: "/transactions",
   },
   {
     title: "Assets",
-    link: "/",
-  }
-]
+    link: "/assets",
+  },
+];

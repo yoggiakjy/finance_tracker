@@ -14,7 +14,7 @@ const FinancialRecordList = ({
     if (year && month) {
       fetchRecordsByDate(year, month);
     }
-  }, [year, month])
+  }, [year, month, fetchRecordsByDate])
 
   return (
     <div className="relative z-50">
