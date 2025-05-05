@@ -2,7 +2,6 @@ import { useUser } from "@clerk/clerk-react";
 import AssetTracker from "../../components/ui/assets/AssetTracker";
 import AssetBreakdown from "../../components/ui/assets/AssetBreakdown";
 import MilestoneCell from "../../components/ui/assets/MilestoneCell";
-import SummaryCell from "../../components/ui/assets/SummaryCell";
 import AssetsView from "../../components/AssetsView";
 const Asset = () => {
   const { isSignedIn, user, isLoaded } = useUser();

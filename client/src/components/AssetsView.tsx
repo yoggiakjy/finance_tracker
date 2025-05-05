@@ -8,10 +8,10 @@ import SummaryCell from "./ui/assets/SummaryCell";
 import { useState } from "react";
 import { InvestmentRecord } from "../lib/globalTypes";
 import InvestmentModal from "./ui/assets/InvestmentModal";
+import { useInvestmentRecords } from "../contexts/InvestmentRecordContext";
 
 const AssetsView = ({ className }: { className?: string }) => {
   const { balance } = useFinancialBalance();
-  const [investments, setInvestments] = useState<InvestmentRecord[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [investmentType, setInvestmentType] = useState<
     "Savings" | "Crypto" | "Stock"
@@ -20,10 +20,6 @@ const AssetsView = ({ className }: { className?: string }) => {
   const handleClick = (type: "Savings" | "Crypto" | "Stock") => {
     setInvestmentType(type);
     setIsModalOpen(true);
-  };
-
-  const handleFormSubmit = (newInvestment: InvestmentRecord) => {
-    setInvestments((prevInvestments) => [...prevInvestments, newInvestment]);
   };
 
   return (
@@ -43,29 +39,20 @@ const AssetsView = ({ className }: { className?: string }) => {
           className="hover:cursor-pointer transition transform hover:scale-105 hover:shadow-lg duration-200 ease-in-out"
           onClick={() => handleClick("Stock")}
         >
-          <ActionButton
-            icon={<TbPigMoney />}
-            buttonText={"Stock"}
-            className="hover:cursor-pointer transition transform hover:scale-105 hover:shadow-lg duration-200 ease-in-out"
-          />
+          <ActionButton icon={<TbPigMoney />} buttonText={"Stock"} />
         </button>
 
         <button
           className="hover:cursor-pointer transition transform hover:scale-105 hover:shadow-lg duration-200 ease-in-out"
           onClick={() => handleClick("Crypto")}
         >
-          <ActionButton
-            icon={<BsThreeDots />}
-            buttonText={"Crypto"}
-            className="hover:cursor-pointer transition transform hover:scale-105 hover:shadow-lg duration-200 ease-in-out"
-          />
+          <ActionButton icon={<BsThreeDots />} buttonText={"Crypto"} />
         </button>
       </div>
 
       <InvestmentModal
         isOpen={isModalOpen}
         type={investmentType}
-        submitFunction={handleFormSubmit}
         onClose={() => {
           setIsModalOpen(false);
           setInvestmentType("Savings");

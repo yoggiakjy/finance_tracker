@@ -7,13 +7,11 @@ const InvestmentModal = ({
   isOpen,
   onClose,
   type,
-  submitFunction,
   className,
 }: {
   isOpen: boolean;
   onClose: () => void;
   type: "Savings" | "Crypto" | "Stock";
-  submitFunction: (newInvestment: InvestmentRecord) => void;
   className?: string;
 }) => {
   const [date, setDate] = useState<Date>(new Date());
