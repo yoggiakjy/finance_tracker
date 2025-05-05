@@ -4,9 +4,10 @@ import { useUser } from "@clerk/clerk-react";
 
 export interface InvestmentRecordsContextType {
   records: InvestmentRecord[];
+  fetchRecords: () => void;
   addRecord: (record: InvestmentRecord) => void;
   updateRecord: (id: string, newRecord: InvestmentRecord) => void;
-  deleteRecord: (id: string) => void;
+  deleteRecord: (id: string) => Promise<boolean>;
 }
 
 export const InvestmentRecordsContext = createContext<
@@ -86,7 +87,7 @@ export const InvestmentRecordsProvider = ({
     }
   };
 
-  const deleteRecord = async (id: string) => {
+  const deleteRecord = async (id: string): Promise<boolean> => {
     const response = await fetch(
       `http://localhost:3001/investment-records/${id}`,
       {
@@ -100,9 +101,13 @@ export const InvestmentRecordsProvider = ({
         setRecords((prev) =>
           prev.filter((record) => record._id !== deletedRecord.id)
         );
+        return true;
+      } else {
+        return false;
       }
     } catch (err) {
       console.error(err);
+      return false;
     }
   };
 
@@ -110,6 +115,7 @@ export const InvestmentRecordsProvider = ({
     <InvestmentRecordsContext.Provider
       value={{
         records,
+        fetchRecords,
         addRecord,
         updateRecord,
         deleteRecord,

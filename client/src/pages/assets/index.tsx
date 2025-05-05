@@ -27,7 +27,6 @@ const Asset = () => {
           </div>
 
           <AssetBreakdown />
-          <AssetTracker />
         </div>
 
         {/* Main Balance and Transactions */}

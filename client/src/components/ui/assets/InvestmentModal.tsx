@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { InvestmentRecord } from "../../../lib/globalTypes";
 import { useUser } from "@clerk/clerk-react";
 import { useInvestmentRecords } from "../../../contexts/InvestmentRecordContext";
 

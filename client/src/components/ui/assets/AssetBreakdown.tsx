@@ -5,12 +5,18 @@ import { useInvestmentRecords } from "../../../contexts/InvestmentRecordContext"
 
 const AssetBreakdown = ({ className }: { className?: string }) => {
   const [isEditMode, setIsEditMode] = useState(false);
-  const { records, deleteRecord } = useInvestmentRecords();
-  const [ updatedInvestments, isLoading] = usePriceManager(records);
+  const { records, fetchRecords, deleteRecord } = useInvestmentRecords();
+  const [updatedInvestments, isLoading] = usePriceManager(records);
+  // const [localInvestments, setLocalInvestments] =
+  //   useState<InvestmentRecord[]>(updatedInvestments);
   const toggleEditMode = () => setIsEditMode(!isEditMode);
 
-  const handleDeleteInvestment = (id: string) => {
-    deleteRecord(id)
+  const handleDeleteInvestment = async (id: string) => {
+    // setLocalInvestments((prev) => prev.filter((inv) => inv._id !== id));
+    const success = await deleteRecord(id);
+    if (success) {
+      fetchRecords();
+    }
   };
 
   return (
@@ -59,8 +65,9 @@ const AssetBreakdown = ({ className }: { className?: string }) => {
                 {isEditMode && (
                   <button
                     onClick={() => {
-                      if (investment._id)
+                      if (investment._id) {
                         handleDeleteInvestment(investment._id);
+                      }
                     }}
                     className="cursor-pointer ml-3"
                   >

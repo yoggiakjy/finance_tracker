@@ -16,7 +16,7 @@ const investmentRecordSchema = new mongoose.Schema<InvestmentRecord>({
     date: {type: Date, required: true},
     type: {type: String, required: true},
     entry: {type: String, required: true},
-    amount: {type: String, required: true},
+    amount: {type: String, required: false},
     description: {type: String, required: false},
     equity: {type: String, required: false},
     rate: {type: String, required: false},
